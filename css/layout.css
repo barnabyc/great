@@ -1,0 +1,13 @@
+#great {
+  width: 900px;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+li {
+  margin: 0 0 20px;
+}
+
+#great li {
+  text-align: center
+}

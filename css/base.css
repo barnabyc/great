@@ -1,0 +1,17 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+html, body, input, textarea {
+  font-family: 'Open Sans Condensed';
+  font-weight: 300;
+  font-size: 20px;
+  color: #444;
+}
+
+ul,ol,li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
