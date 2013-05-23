@@ -19,7 +19,7 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-  width: 860px;
+  width: 660px;
 
   outline: 0;
 
@@ -32,7 +32,16 @@ input[type=text]:focus {
 */
 }
 
-.populated {
+input[type=text].populated {
   background: #fafafa;
 }
 
+
+input[type=text]:focus::-webkit-input-placeholder { color: #888; }
+input[type=text]:focus:-moz-placeholder           { color: #888; }
+input[type=text]:focus::-moz-placeholder          { color: #888; }
+input[type=text]:focus:-ms-input-placeholder      { color: #888; }
+
+/* Wish this worked in WebKit */
+input[type=text]::selection      { background: #f00; }
+input[type=text]::-moz-selection { background: #f00; }
