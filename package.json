@@ -1,0 +1,13 @@
+{
+  "name": "great",
+  "version": "0.0.1",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.3",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-less": "~0.5.2",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-contrib-handlebars": "~0.5.8"
+  }
+}

@@ -24,22 +24,7 @@ YUI.add('great:views:list', function (Y) {
       var container = this.get('container');
 
       container.setHTML(
-        '<div class="tabitha" tabindex="1"></div>' +
-        '<ul> \
-          <li> \
-            <form><input tabindex="10" type="text" placeholder="Become queen of the universe"></form> \
-          </li> \
-          <li> \
-            <form><input tabindex="20" type="text" placeholder="Conquer distant galaxies"></form> \
-          </li> \
-          <li> \
-            <form><input class="populated" tabindex="30" type="text" placeholder="Rule with an iron fist" value="Write the great French treatise"></form> \
-          </li> \
-          <li> \
-            <form><input tabindex="40" type="text" placeholder="Control the fundamental forces"></form> \
-          </li> \
-        </ul>'
-        + '<div class="tabitha" tabindex="9999"></div>'
+        Tmpl.list_view()
       );
 
       container.all('.tabitha').each(function(t){
@@ -80,11 +65,12 @@ YUI.add('great:views:list', function (Y) {
     @param {EventFacade} ev
     **/
     _handleChange: function (ev) {
-      var target = ev.currentTarget;
+      var target = ev.currentTarget,
+          value  = target.get('value');
 
       Y.log('_handleChange', 'debug', this.constructor.NAME);
 
-      if (target.get('value')) target.addClass('populated');
+      target.toggleClass('populated', !!value);
     }
   },
   {
