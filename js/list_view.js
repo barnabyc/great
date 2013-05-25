@@ -8,7 +8,7 @@ YUI.add('great:views:list', function (Y) {
     @property containerTemplate
     @type {String}
     **/
-    containerTemplate: '<div class="great-list" />',
+    containerTemplate: '<div class="list-view" />',
 
     /**
     @property events
@@ -24,7 +24,9 @@ YUI.add('great:views:list', function (Y) {
       var container = this.get('container');
 
       container.setHTML(
-        Tmpl.list_view()
+        Tmpl.list_view({
+          title: this.get('title')
+        })
       );
 
       container.all('.tabitha').each(function(t){
@@ -75,7 +77,17 @@ YUI.add('great:views:list', function (Y) {
   },
   {
     ATTRS: {
-      // Great Blankness
+      /**
+      @attribute title
+      @type {String}
+      **/
+      title: {},
+
+      /**
+      @attribute modelList
+      @type {ModelList}
+      **/
+      modelList: {}
     }
   });
 

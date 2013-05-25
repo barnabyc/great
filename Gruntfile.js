@@ -24,14 +24,14 @@ module.exports = function(grunt) {
         files: ['build/great.less'],
         tasks: ['less:all'],
         options: { interrupt: true }
-      },
+      }
 
       // @todo don't run cssmin in dev mode
-      cssMinif: {
-        files: ['build/great.css'],
-        tasks: ['cssmin'],
-        options: { interrupt: true }
-      }
+      // cssMinif: {
+      //   files: ['build/great.css'],
+      //   tasks: ['cssmin'],
+      //   options: { interrupt: true }
+      // }
     },
 
     // CSS Concatination
@@ -49,7 +49,8 @@ module.exports = function(grunt) {
       all: {
         options: { paths: ["css"] },
         files: {
-          'build/great.css': 'build/great.less'
+          'build/great.css': 'build/great.less',
+          'css/great.css': 'build/great.less'
         }
       }
     },

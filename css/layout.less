@@ -1,13 +1,41 @@
+@contentWidth: 600px;
+
+header {
+  font-family: 'Open Sans';
+  font-size: 48px;
+  letter-spacing: 2em;
+  text-align: center;
+  background: tomato;
+  color: #fff;
+  margin-right: -2em; // wtf css?
+}
+
 #great {
-  width: 900px;
+  width: @contentWidth;
   margin: 0 auto;
-  padding: 80px 0;
-}
+  padding: 60px 0;
+  clear: both;
 
-li {
-  margin: 0 0 20px;
-}
+  .columns {
+    clear: both;
+    overflow: auto;
 
-#great li {
-  text-align: center
+    .left {
+      float: left;
+      width: @contentWidth / 2;
+    }
+
+    .right {
+      float: right;
+      width: @contentWidth / 2;
+
+      text-align: right;
+    }
+  }
+
+  .bottom {
+    margin-top: 40px;
+
+    text-align: center;
+  }
 }
