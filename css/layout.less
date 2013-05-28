@@ -10,36 +10,22 @@ header {
   margin-right: -2em; // wtf css?
 }
 
+h1 {
+  text-align: center;
+  background: fade(tomato, 75%);
+  color: #fff;
+  font-weight: normal;
+  letter-spacing: .4em;
+  margin-right: -.4em;
+}
+
 #great {
   width: @contentWidth;
   margin: 0 auto;
-  padding: 60px 0;
+  padding: 30px 0;
   clear: both;
+}
 
-  .columns {
-    clear: both;
-    overflow: auto;
-
-    .left {
-      float: left;
-      width: @contentWidth / 2;
-    }
-
-    .right {
-      float: right;
-      width: @contentWidth / 2;
-
-      text-align: right;
-
-      &.disabled {
-        opacity: 0.25;
-      }
-    }
-  }
-
-  .bottom {
-    margin-top: 40px;
-
-    text-align: center;
-  }
+footer {
+  text-align: center;
 }

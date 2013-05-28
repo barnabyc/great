@@ -6,25 +6,17 @@ YUI().use(
   var yourListsView = new Y.GREAT.ListsView({
         title: 'Your Lists'
       }),
-      taggedYouListsView = new Y.GREAT.ListsView({
-        title: "Lists You're Tagged In"
-      }),
-      listView  = new Y.GREAT.ListView(),
-      left   = Y.one('#great .left'),
-      right  = Y.one('#great .right'),
-      bottom = Y.one('#great .bottom');
+      listView = new Y.GREAT.ListView(),
+      great    = Y.one('#great'),
+      footer   = Y.one('footer');
 
-  left.append(
+  great.append(
     yourListsView.render().get('container')
-  );
-
-  right.append(
-    taggedYouListsView.render().get('container')
   );
 
   // ---
 
-  bottom.append(
+  footer.append(
     listView.render().get('container')
   );
 
