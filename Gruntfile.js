@@ -78,18 +78,46 @@ module.exports = function(grunt) {
           "js/templates.js": "templates/**/*.hbs"
         }
       }
+    },
+
+    // UglifyJS
+    uglify: {
+      greatApp: {
+        files: {
+          'js/great-modules.min.js': [
+            'js/list_view.js',
+            'js/lists_view.js'
+          ],
+          'js/great.min.js'    : [ 'js/great.js' ],
+          'js/templates.min.js': [ 'js/templates.js' ]
+        }
+      }
     }
+    // uglify: {
+    //   greatApp: {
+    //     files: [
+    //       {
+    //         expand: true,     // Enable dynamic expansion.
+    //         cwd: 'js/',       // Src matches are relative to this path.
+    //         src: ['**/*.js'], // Actual pattern(s) to match.
+    //         dest: 'build/',   // Destination path prefix.
+    //         ext: '.min.js',   // Dest filepaths will have this extension.
+    //       },
+    //     ],
+    //   }
+    // }
 
   });
 
   grunt.registerTask('lessify', ['concat:great', 'less:all']);
   grunt.registerTask('bootstrap', ['lessify', 'handlebars']);
-  grunt.registerTask('build', ['lessify', 'cssmin', 'handlebars']);
+  grunt.registerTask('build', ['lessify', 'cssmin', 'handlebars', 'uglify']);
 
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
 };

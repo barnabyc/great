@@ -10,8 +10,8 @@ YUI().use(
         title: "Lists You're Tagged In"
       }),
       listView  = new Y.GREAT.ListView(),
-      left = Y.one('#great .left'),
-      right = Y.one('#great .right'),
+      left   = Y.one('#great .left'),
+      right  = Y.one('#great .right'),
       bottom = Y.one('#great .bottom');
 
   left.append(

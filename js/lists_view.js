@@ -15,7 +15,7 @@ YUI.add('great:views:lists', function (Y) {
     @type {Object}
     **/
     events: {
-      // events yo?
+      'a': { click: '_handleItemClick' }
     },
 
     /**
@@ -31,6 +31,20 @@ YUI.add('great:views:lists', function (Y) {
       );
 
       return this;
+    },
+
+
+    /**
+    @param {EventFacade} ev
+    **/
+    _handleItemClick: function (ev) {
+      ev.preventDefault();
+      var target = ev.currentTarget;
+
+      // @todo change model state here, derp and
+      // then have save event render class states
+
+      target.one('i').toggleClass('icon-check-empty').toggleClass('icon-check');
     }
   },
   {
