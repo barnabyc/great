@@ -1,12 +1,11 @@
 YUI().use(
   'great:views:list',
   'great:views:lists',
+  'great:views:your_lists',
   function (Y) {
 
-  var yourListsView = new Y.GREAT.ListsView({
-        title: 'Your Lists'
-      }),
-      listView = new Y.GREAT.ListView(),
+  var yourListsView = new Y.GREAT.YourListsView(),
+      listView = new Y.GREAT.ListView(), //=FEMOCK
       great    = Y.one('#great'),
       footer   = Y.one('footer');
 

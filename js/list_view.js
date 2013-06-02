@@ -1,7 +1,7 @@
 YUI.add('great:views:list', function (Y) {
 
   var ListView = Y.Base.create('great:listView',
-    Y.View,
+    Y.Lib.ListView,
     [],
   {
     /**
@@ -20,7 +20,26 @@ YUI.add('great:views:list', function (Y) {
       }
     },
 
-    render: function () {
+    /**
+    Template for each model in the modellist
+
+    @property itemView
+    @type {Tmpl.list_item}
+    **/
+    itemView: 'listItemTemplate',
+
+    /**
+    The container the items should render into.
+
+    @property listContainerSelector
+    @type {String}
+    **/
+    listContainerSelector: 'ul',
+
+    /**
+    @method renderLayout
+    **/
+    renderLayout: function () {
       var container = this.get('container');
 
       container.setHTML(
@@ -33,8 +52,6 @@ YUI.add('great:views:list', function (Y) {
         t.on('focus', this._handleFocus, this);
         // t.on('blur', this._handleBlur, this);
       }, this);
-
-      return this;
     },
 
     /**
@@ -84,10 +101,28 @@ YUI.add('great:views:list', function (Y) {
       title: {},
 
       /**
+      @attribute listItemTemplate
+      @type {Function}
+      **/
+      listItemTemplate: {
+        value: Tmpl.list_item
+      },
+
+      /**
       @attribute modelList
       @type {ModelList}
       **/
-      modelList: {}
+      modelList: {
+        valueFn: function () {
+          return new Y.ModelList({
+            items: [
+              { name: 'Do that thing with that stuff' },
+              { name: 'Plant the doodads' },
+              { name: 'Fly the kite' }
+            ]
+          })
+        }
+      }
     }
   });
 
@@ -97,6 +132,7 @@ YUI.add('great:views:list', function (Y) {
 '0.0.1',
 {
   requires: [
-    'view'
+    'views:lib:list',
+    'model-list'
   ]
 });
