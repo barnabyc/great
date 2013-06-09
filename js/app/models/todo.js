@@ -1,12 +1,12 @@
-YUI.add('great:models:your_list_item', function (Y) {
+YUI.add('great:models:todo', function (Y) {
 
   /**
-  @class YourListItem
+  @class ToDo
   @namespace GREAT
   @extends Model
   @constructor
   **/
-  var YourListItem = Y.Base.create('great:yourListItem',
+  var ToDo = Y.Base.create('great:toDo',
     Y.Model,
     [],
   {
@@ -34,7 +34,7 @@ YUI.add('great:models:your_list_item', function (Y) {
     }
   });
 
-  Y.namespace('GREAT').YourListItem = YourListItem;
+  Y.namespace('GREAT').ToDo = ToDo;
 
 },
 '0.0.1',

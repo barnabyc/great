@@ -1,6 +1,6 @@
-YUI.add('great:views:brief_lists', function (Y) {
+YUI.add('great:views:todos_list', function (Y) {
 
-  var BriefListsView = Y.Base.create('great:briefListsView',
+  var ToDosListView = Y.Base.create('great:toDosListView',
     Y.Lib.ListView,
     [],
   {
@@ -8,7 +8,7 @@ YUI.add('great:views:brief_lists', function (Y) {
     @property containerTemplate
     @type {String}
     **/
-    containerTemplate: '<ol class="brief-lists" />',
+    containerTemplate: '<ol class="todos-list brief-lists" />',
 
     /**
     BriefListItemView for each of the lists.
@@ -16,35 +16,37 @@ YUI.add('great:views:brief_lists', function (Y) {
     @property itemView
     @type {GREAT.BriefListView}
     **/
-    itemView: Y.GREAT.BriefListView,
+    itemView: Y.GREAT.ToDosView,
 
     /**
     @method additionalItemViewAttrs
+    @param {GREAT.ToDos} model
     **/
     additionalItemViewAttrs: function (model) {
       return {
-        modelList: model
+        modelList: model.get('toDoList')
       };
     }
+
   },
   {
     ATTRS: {
       /**
       @attribute modelList
-      @type {GREAT.YourLists}
+      @type {GREAT.ToDosList}
       **/
       modelList: {}
     }
   });
 
-  Y.namespace('GREAT').BriefListsView = BriefListsView;
+  Y.namespace('GREAT').ToDosListView = ToDosListView;
 
 },
 '0.0.1',
 {
   requires: [
     'views:lib:list',
-    'great:views:brief_list'
+    'great:views:todos'
   ]
 });
 

@@ -1,6 +1,6 @@
-YUI.add('great:views:brief_list_item', function (Y) {
+YUI.add('great:views:todo', function (Y) {
 
-  var BriefListItemView = Y.Base.create('great:briefListItemView',
+  var ToDoView = Y.Base.create('great:toDoView',
     Y.View,
     [],
   {
@@ -8,7 +8,7 @@ YUI.add('great:views:brief_list_item', function (Y) {
     @property containerTemplate
     @type {String}
     **/
-    containerTemplate: '<ol class="brief-list" />',
+    containerTemplate: '<li class="todo" />',
 
     /**
     @property events
@@ -27,7 +27,7 @@ YUI.add('great:views:brief_list_item', function (Y) {
     **/
     render: function () {
       var container = this.get('container'),
-          tmpl      = Tmpl['brief_list_item'],
+          tmpl      = Tmpl['todo'],
           tmplVars  = this.get('model').toJSON();
 
       container.setHTML( tmpl( tmplVars ) );
@@ -51,13 +51,13 @@ YUI.add('great:views:brief_list_item', function (Y) {
     ATTRS: {
       /**
       @attribute model
-      @type {GREAT.YourListItem}
+      @type {GREAT.ToDo}
       **/
       model: {}
     }
   });
 
-  Y.namespace('GREAT').BriefListItemView = BriefListItemView;
+  Y.namespace('GREAT').ToDoView = ToDoView;
 
 },
 '0.0.1',

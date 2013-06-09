@@ -1,6 +1,6 @@
-YUI.add('great:views:brief_list', function (Y) {
+YUI.add('great:views:todos', function (Y) {
 
-  var BriefListView = Y.Base.create('great:briefListView',
+  var ToDosView = Y.Base.create('great:toDosView',
     Y.Lib.ListView,
     [],
   {
@@ -8,7 +8,7 @@ YUI.add('great:views:brief_list', function (Y) {
     @property containerTemplate
     @type {String}
     **/
-    containerTemplate: '<div class="brief-list" />',
+    containerTemplate: '<ol class="todos brief-list" />',
 
     /**
     @property events
@@ -24,11 +24,9 @@ YUI.add('great:views:brief_list', function (Y) {
     @property itemView
     @type {GREAT.BriefListView}
     **/
-    itemView: Y.GREAT.BriefListItemView,
+    itemView: Y.GREAT.ToDoView,
 
     /**
-    CSS selector for each BriefListItemView appended.
-
     @property listContainerSelector
     @type {String}
     **/
@@ -39,8 +37,8 @@ YUI.add('great:views:brief_list', function (Y) {
     **/
     renderLayout: function () {
       var container = this.get('container'),
-          tmpl      = Tmpl['brief_list'],
-          tmplVars  = this.get('modelList').getAttrs(['title', 'url']);
+          tmpl      = Tmpl['todos'],
+          tmplVars  = this.get('model').getAttrs();
 
       container.setHTML( tmpl( tmplVars ) );
     },
@@ -53,29 +51,29 @@ YUI.add('great:views:brief_list', function (Y) {
       ev.preventDefault();
       var target = ev.currentTarget;
 
-      target.toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
-
       target.ancestor('li').toggleClass('open');
+
+      // @todo swap :before elements using .open state
+      target.toggleClass('icon-plus-sign').toggleClass('icon-minus-sign');
     }
   },
   {
     ATTRS: {
       /**
-      @attribute modelList
-      @type {GREAT.YourList}
+      @attribute model
+      @type {GREAT.ToDos}
       **/
-      modelList: {}
+      model: {}
     }
   });
 
-  Y.namespace('GREAT').BriefListView = BriefListView;
+  Y.namespace('GREAT').ToDosView = ToDosView;
 
 },
 '0.0.1',
 {
   requires: [
     'views:lib:list',
-    'great:views:brief_list',
-    'great:views:brief_list_item'
+    'great:views:todo'
   ]
 });

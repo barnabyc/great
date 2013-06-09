@@ -1,0 +1,20 @@
+.todos {
+  display: block;
+
+  li {
+    ol.todo {
+      display: none;
+    }
+
+    &.open {
+      ol.todo {
+        display: block;
+      }
+
+      .opener {
+        color: tomato;
+      }
+    }
+  }
+
+}
