@@ -1,5 +1,5 @@
 YUI().use(
-  'great:models:your_lists',
+  // 'great:models:your_lists',
   'great:models:your_list',
   'great:views:your_lists',
   'great:views:brief_lists',
@@ -7,13 +7,11 @@ YUI().use(
   'great:views:brief_list_item',
   function (Y) {
 
-  var great    = Y.one('#great'),
-      // footer   = Y.one('footer'),
+  var great = Y.one('#great'),
       list1,
       list2,
       list3,
-      yourLists,
-      yourListsView;
+      briefListsView;
 
   list1 = new Y.GREAT.YourList({
     url: '/abc/123',
@@ -48,40 +46,14 @@ YUI().use(
     ]
   });
 
-  // yourLists = new Y.GREAT.YourLists({
-  //   items: [ list1, list2, list3 ]
-  // });
+  // Create the View
+  briefListsView = new Y.GREAT.BriefListsView({
+    modelList: new Y.ArrayList([
+      list1, list2, list3
+    ])
+  }).render().get('container');
 
-  // yourListsView = new Y.GREAT.YourListsView({
-  //   modelList: yourLists
-  // });
-
-  // great.append(
-  //   yourListsView.render().get('container')
-  // );
-
-  great.append(
-    new Y.GREAT.BriefListItemView({
-      model: list1.item(0)
-    }).render().get('container')
-  );
-
-  great.append('<hr>');
-
-  great.append(
-    new Y.GREAT.BriefListView({
-      modelList: list1
-    }).render().get('container')
-  );
-
-  great.append('<hr>');
-
-  great.append(
-    new Y.GREAT.BriefListsView({
-      modelList: new Y.ArrayList([
-        list1, list2, list3
-      ])
-    }).render().get('container')
-  );
+  // Add the View to the DOM
+  great.append( briefListsView );
 
 });

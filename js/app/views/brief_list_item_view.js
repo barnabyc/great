@@ -18,6 +18,10 @@ YUI.add('great:views:brief_list_item', function (Y) {
       'a': { click: '_handleClick' }
     },
 
+    initializer: function () {
+      this.get('model').after('completeChange', this.render, this);
+    },
+
     /**
     @method renderLayout
     **/
@@ -37,11 +41,10 @@ YUI.add('great:views:brief_list_item', function (Y) {
     **/
     _handleClick: function (ev) {
       ev.preventDefault();
-      var target  = ev.currentTarget,
-          checked = !target.one('i').hasClass('icon-check-sign');
 
-      this.get('model').set('complete', checked);
-      this.render();
+      var complete = !this.get('model').get('complete');
+
+      this.get('model').set('complete', complete);
     }
   },
   {
