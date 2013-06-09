@@ -15,7 +15,7 @@ module.exports = function(grunt) {
           interrupt: false
         }
       },
-      concatLess: {
+      concat: {
         files: ['css/**/*.less'],
         tasks: ['concat:great'],
         options: { interrupt: true }
@@ -24,14 +24,12 @@ module.exports = function(grunt) {
         files: ['build/great.less'],
         tasks: ['less:all'],
         options: { interrupt: true }
+      },
+      jshint: {
+        files: ['js/**/*.js'],
+        tasks: ['jshint'],
+        options: { interrupt: true }
       }
-
-      // @todo don't run cssmin in dev mode
-      // cssMinif: {
-      //   files: ['build/great.css'],
-      //   tasks: ['cssmin'],
-      //   options: { interrupt: true }
-      // }
     },
 
     // CSS Concatination
@@ -92,7 +90,7 @@ module.exports = function(grunt) {
           'js/templates.min.js': [ 'js/templates.js' ]
         }
       }
-    }
+    },
     // uglify: {
     //   greatApp: {
     //     files: [
@@ -107,6 +105,33 @@ module.exports = function(grunt) {
     //   }
     // }
 
+    // JSHint
+    jshint: {
+      options: {
+        curly: false,
+        camelcase: false,
+        eqeqeq: true,
+        browser: true,
+        indent: 2,
+        newcap: true,
+        undef: true,
+        unused: true,
+        trailing: true,
+        sub: true,
+        maxlen: 120,
+        globals: {
+          YUI: true,
+          Tmpl: true
+        }
+      },
+      files: {
+        src: [
+          'js/great.js',
+          'js/app/**/*.js'
+        ]
+      }
+    }
+
   });
 
   grunt.registerTask('lessify', ['concat:great', 'less:all']);
@@ -119,5 +144,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
 };

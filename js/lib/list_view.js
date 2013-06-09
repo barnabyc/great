@@ -104,6 +104,8 @@ YUI.add('views:lib:list', function (Y) {
     @chainable
     **/
     render: function () {
+      Y.log(this.constructor.NAME);
+
       var emptyList = this.get('modelList').isEmpty();
 
       if (!emptyList) {
@@ -162,13 +164,17 @@ YUI.add('views:lib:list', function (Y) {
     @description renders each list item
     **/
     renderListItems: function () {
-      var models;
+      var modelList = this.get('modelList'),
+          models;
 
       if (this.reviveLazyModels) {
-        models = this.get('modelList').revive();
+        models = modelList.revive();
+
+      } else if (modelList instanceof Y.ArrayList) {
+        models = modelList._items;
 
       } else {
-        models = this.get('modelList').toArray();
+        models = modelList.toArray();
       }
 
       Y.each(models, this.add, this);
@@ -195,7 +201,7 @@ YUI.add('views:lib:list', function (Y) {
     _addModelListListeners: function () {
       var modelList = this.get('modelList');
 
-      if (modelList) {
+      if (modelList && modelList._isYUIModelList) {
         modelList.after("reset",  this.render,    this);
         modelList.after("add",    this._afterAdd, this);
       }
