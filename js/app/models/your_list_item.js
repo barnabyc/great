@@ -24,7 +24,7 @@ YUI.add('great:models:your_list_item', function (Y) {
       @attribute name
       @type {String}
       **/
-      title: {},
+      name: {},
 
       /**
       @attribute memo
