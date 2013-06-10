@@ -1,20 +1,40 @@
 .todos {
   display: block;
 
-  li {
-    ol.todo {
-      display: none;
+  .opener {
+    padding: 4px 14px 3px 3px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .title {
+    margin-left: -4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .categories {
+    margin-left: 33px;
+    color: #888;
+  }
+
+  &.open {
+    .todo-list {
+      display: block;
     }
 
-    &.open {
-      ol.todo {
-        display: block;
-      }
-
-      .opener {
-        color: tomato;
-      }
+    .opener {
+      color: tomato;
     }
+  }
+
+  .todo-list {
+    display: none;
   }
 
 }

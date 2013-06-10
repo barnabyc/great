@@ -8,7 +8,7 @@ YUI.add('great:views:todos', function (Y) {
     @property containerTemplate
     @type {String}
     **/
-    containerTemplate: '<ol class="todos brief-list" />',
+    containerTemplate: '<li class="todos brief-list" />',
 
     /**
     @property events
@@ -19,7 +19,7 @@ YUI.add('great:views:todos', function (Y) {
     },
 
     /**
-    BriefListItemView for each of the lists.
+    ToDoView for each of the lists.
 
     @property itemView
     @type {GREAT.BriefListView}
@@ -38,9 +38,28 @@ YUI.add('great:views:todos', function (Y) {
     renderLayout: function () {
       var container = this.get('container'),
           tmpl      = Tmpl['todos'],
-          tmplVars  = this.get('model').getAttrs();
+          tmplVars  = this.get('model').getAttrs(),
+          showFullDetail = this.get('showFullDetail');
+
+      if (showFullDetail) {
+        tmplVars  = Y.merge(
+          tmplVars,
+          { showFullDetail: showFullDetail }
+        );
+
+        container.addClass('open');
+      }
 
       container.setHTML( tmpl( tmplVars ) );
+    },
+
+    /**
+    @method additionalItemViewAttrs
+    **/
+    additionalItemViewAttrs: function () {
+      return {
+        showFullDetail: this.get('showFullDetail')
+      };
     },
 
     /**
@@ -60,10 +79,22 @@ YUI.add('great:views:todos', function (Y) {
   {
     ATTRS: {
       /**
+      @attribute showFullDetail
+      @type {Boolean}
+      **/
+      showFullDetail: {},
+
+      /**
       @attribute model
       @type {GREAT.ToDos}
       **/
-      model: {}
+      model: {},
+
+      /**
+      @attribute modelList
+      @type {GREAT.ToDoList}
+      **/
+      modelList: {}
     }
   });
 

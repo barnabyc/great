@@ -1,65 +1,98 @@
-YUI().use(
-  'great:models:todos_list',
-  'great:views:todos_list',
-  'node',
-  function (Y) {
+YUI.add('great:app', function (Y) {
 
-  var great = Y.one('#great'),
-      toDosList,
-      toDosListView;
+  var App = Y.Base.create(
+    'great:app',
+    Y.App.Base,
+    [],
+  {
 
-  toDosList = new Y.GREAT.ToDosList(); // ToDosList
-  toDosList.reset([
-    {                                  // ToDos
-      id: 'abc123',
-      title: 'The plant list',
-      categories: ['garden'],
-      toDoList: [                      // ToDoList
-        {                              // ToDo
-          complete: true,
-          name: 'Find Hostas',
-          memo: 'Try Hingham Facebook group.'
-        },
-        { complete: true,  name: 'Buy Hostas',      memo: 'The house on Main St is giving them away for FREE!' },
-        { complete: true,  name: 'Get shovel back', memo: 'Distract Dennis to steal my shovel back!'},
-        { complete: false, name: 'Plant Hostas',    memo: 'Perhaps in the front left bed.' }
-      ]
+    /**
+    @attribute views
+    @type {Object}
+    **/
+    views: {
+      todos_list: {
+        type: Y.GREAT.ToDosListView
+      },
+      todo_list: {
+        type: Y.GREAT.ToDosView
+      }
     },
 
-    {
-      id: 'def456',
-      title: 'The universe domination list',
-      categories: ['home-improvement', 'manifest-destiny'],
-      toDoList: [
-        { complete: true,  name: 'Plan Ultimate Machine',                memo: 'dun dun DUNNNN!!!' },
-        { complete: true,  name: 'Buy spark plugs for Ultimate Machine', memo: 'I think Sears has cheap ones...' },
-        { complete: false, name: 'Get wrench back',
-          memo: 'Stupid Dennis! Distract him again to steal my wrench back.'},
-        { complete: false, name: 'Find extension cord', memo: 'Better not be with Dennis...' }
-      ]
+    /**
+    Show all the ToDo lists.
+
+    @method showLists
+    **/
+    showLists: function () {
+      var toDosList = this.get('toDosList');
+
+      this.showView('todos_list', {
+        modelList: toDosList
+      });
     },
 
-    {
-      id: 'ghi789',
-      title: 'The smelly cat list',
-      categories: ['pets'],
-      toDoList: [
-        { complete: true,  name: 'Rescue Cat',            memo: 'Mr. Wuffles at Old Derby Shelter was adorable.' },
-        { complete: false, name: 'Dunk Cat in Chem bath', memo: 'Are cats supposed to be dunked?' },
-        { complete: false, name: 'Build Cat fort',
-          memo: 'Mr. Wuffles needs a proper home if he\'s going to dominate the universe by my side.'},
-        { complete: false,
-          name: 'Determine if Cat is smelly on purpose', memo: 'Perhaps enjoys smelling this bad... ?' }
-      ]
+    /**
+    Show a single ToDo list.
+
+    @method showList
+    @param {Object} req
+    **/
+    showList: function (req) {
+      var toDosList = this.get('toDosList'),
+          toDos;
+
+      toDos = toDosList.getById( req.params.id );
+
+      this.showView('todo_list', {
+        showFullDetail: true,
+        model:          toDos,
+        modelList:      toDos.get('toDoList')
+      });
     }
-  ]);
 
-  // Create the View
-  toDosListView = new Y.GREAT.ToDosListView({
-    modelList: toDosList
-  }).render().get('container');
+  },
+  {
 
-  // Add the View to the DOM
-  great.append( toDosListView );
+    ATTRS: {
 
+      /**
+      @attribute route
+      @type {Array[Object]}
+      **/
+      routes: {
+        value: [
+          {path: '/',    callbacks: 'showLists'},
+          {path: '/:id', callbacks: 'showList'}
+        ]
+      },
+
+      /**
+      @attribute serverRouting
+      @type {Boolean}
+      **/
+      serverRouting: {
+        value: true
+      },
+
+      /**
+      @attribute toDosList
+      @type {GREAT.ToDoLists}
+      **/
+      toDosList: {}
+
+    }
+  });
+
+  // Expose API
+  Y.namespace('GREAT').App = App;
+
+},
+'0.0.1',
+{
+  requires: [
+    'app-base',
+    'great:views:todos_list',
+    'great:views:todo'
+  ]
 });

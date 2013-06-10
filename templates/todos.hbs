@@ -1,11 +1,17 @@
-<li>
-  <a href="{{url}}">
-    <i class="opener icon-plus-sign"></i>
+<i class="opener icon-plus-sign"></i>
+<a class="title"href="{{url}}">
+  {{title}}
+</a>
 
-    {{title}}
-  </a>
+{{#if showFullDetail}}
+  <div class="categories">
+    Categories:
+    {{#each categories}}
+      {{this}}
+    {{/each}}
+  </div>
+{{/if}}
 
-  <ol>
-    {{! many todo }}
-  </ol>
-</li>
+<ol class="todo-list">
+  {{! many todo }}
+</ol>

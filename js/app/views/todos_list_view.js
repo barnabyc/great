@@ -11,7 +11,7 @@ YUI.add('great:views:todos_list', function (Y) {
     containerTemplate: '<ol class="todos-list brief-lists" />',
 
     /**
-    BriefListItemView for each of the lists.
+    ToDosView for each of the lists.
 
     @property itemView
     @type {GREAT.BriefListView}

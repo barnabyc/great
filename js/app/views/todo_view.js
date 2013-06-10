@@ -26,9 +26,14 @@ YUI.add('great:views:todo', function (Y) {
     @method renderLayout
     **/
     render: function () {
+      Y.log(this.constructor.NAME);
+
       var container = this.get('container'),
           tmpl      = Tmpl['todo'],
-          tmplVars  = this.get('model').toJSON();
+          tmplVars  = Y.merge(
+            this.get('model').toJSON(),
+            { showFullDetail: this.get('showFullDetail') }
+          );
 
       container.setHTML( tmpl( tmplVars ) );
 
@@ -49,6 +54,12 @@ YUI.add('great:views:todo', function (Y) {
   },
   {
     ATTRS: {
+      /**
+      @attribute showFullDetail
+      @type {Boolean}
+      **/
+      showFullDetail: {},
+
       /**
       @attribute model
       @type {GREAT.ToDo}

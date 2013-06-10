@@ -16,7 +16,6 @@
   <script src="js/vendor/handlebars.runtime.js"></script>
 
   <script src="js/templates.js"></script>
-  <!-- script src="js/templates.min.js"></script -->
 
   <script src="js/app/models/todos_list.js"></script><!-- BRO? -->
   <script src="js/app/models/todos.js"></script><!-- BRO?!?! -->
@@ -29,6 +28,12 @@
   <script src="js/app/views/todos_view.js"></script><!-- BRO?! -->
   <script src="js/app/views/todo_view.js"></script><!-- BRO? -->
   <script src="js/great.js"></script>
+
+  <!-- =FEMOCK -->
+  <script src="js/test-data.js"></script>
+
+  <!-- =BUILD -->
+  <!-- script src="js/templates.min.js"></script -->
   <!-- script src="js/great-modules.min.js"></script -->
   <!-- script src="js/great.min.js"></script -->
 </head>
@@ -38,10 +43,18 @@
 
 <h1>Your Lists</h1>
 
-<div id="great">
-</div>
+<div id="great"></div>
 
 <footer></footer>
+
+<script>
+  YUI().use('great:app', 'great:test_data', function (Y) {
+    new Y.GREAT.App({
+      container: "#great",
+      toDosList: Y.namespace('GREAT').TestToDosList
+    }).render().dispatch();
+  });
+</script>
 
 </body>
 </html>
