@@ -10,7 +10,11 @@ YUI.add('great:models:todos', function (Y) {
     Y.Model,
     [],
   {
-    // @todo
+    /**
+    @property _toDoListInstance
+    @type {GREAT.ToDoList}
+    **/
+    _toDoListInstance: null
   },
   {
     ATTRS: {
@@ -39,22 +43,23 @@ YUI.add('great:models:todos', function (Y) {
       },
 
       /**
+      Populate an array of vanilla objects into a list,
+      or just return an empty list.
+
       @attribute toDoList
       @type {GREAT.ToDoList}
       **/
       toDoList: {
         getter: function (val) {
-          Y.log('fucking getter','debug',this.constructor.NAME);
-
-          if (!this._toDoList) {
-            this._toDoList = new Y.GREAT.ToDoList();
+          if (!this._toDoListInstance) {
+            this._toDoListInstance = new Y.GREAT.ToDoList();
 
             if (val && val instanceof Array) {
-              this._toDoList.reset( val );
+              this._toDoListInstance.reset( val );
             }
           }
 
-          return this._toDoList;
+          return this._toDoListInstance;
         }
       }
     }
