@@ -1,12 +1,15 @@
 .todos {
   display: block;
 
-  .opener {
+  .opener,
+  .back {
     padding: 4px 14px 3px 3px;
     cursor: pointer;
+  }
 
+  .opener {
     &:hover {
-      opacity: 0.5;
+      color: tomato;
     }
   }
 
@@ -28,7 +31,8 @@
       display: block;
     }
 
-    .opener {
+    .opener,
+    .back {
       color: tomato;
     }
   }

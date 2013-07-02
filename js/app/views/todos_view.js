@@ -33,13 +33,22 @@ YUI.add('great:views:todos', function (Y) {
     listContainerSelector: 'ol',
 
     /**
+    @method initializer
+    **/
+    initializer: function () {
+      this.after('renderListItems', this._afterRenderListItems, this);
+      this.get('createToDoView').after('create', this._afterCreate, this);
+    },
+
+    /**
     @method renderLayout
     **/
     renderLayout: function () {
       var container = this.get('container'),
-          tmpl      = Tmpl['todos'],
+          showFullDetail = this.get('showFullDetail'),
           tmplVars  = this.get('model').getAttrs(),
-          showFullDetail = this.get('showFullDetail');
+          tmplName  = 'todos',
+          tmpl;
 
       if (showFullDetail) {
         tmplVars  = Y.merge(
@@ -47,8 +56,12 @@ YUI.add('great:views:todos', function (Y) {
           { showFullDetail: showFullDetail }
         );
 
+        tmplName = 'todos_full';
+
         container.addClass('open');
       }
+
+      tmpl = Tmpl[ tmplName ];
 
       container.setHTML( tmpl( tmplVars ) );
     },
@@ -60,6 +73,29 @@ YUI.add('great:views:todos', function (Y) {
       return {
         showFullDetail: this.get('showFullDetail')
       };
+    },
+
+    /**
+    Append the create view at the end of the list.
+
+    @method _afterRenderListItems
+    **/
+    _afterRenderListItems: function (ev) {
+      var container = this.get('container'),
+          listContainer = container.one( this.listContainerSelector );
+
+      listContainer.append(
+        this.get('createToDoView').render().get('container')
+      );
+    },
+
+    /**
+    @method _afterCreate
+    **/
+    _afterCreate: function (ev) {
+      var model = ev.todo;
+
+      this.get('modelList').add( model );
     },
 
     /**
@@ -94,7 +130,17 @@ YUI.add('great:views:todos', function (Y) {
       @attribute modelList
       @type {GREAT.ToDoList}
       **/
-      modelList: {}
+      modelList: {},
+
+      /**
+      @attribute createToDoView
+      @type {GREAT.CreateToDoView}
+      **/
+      createToDoView: {
+        valueFn: function () {
+          return new Y.GREAT.CreateToDoView();
+        }
+      }
     }
   });
 
@@ -105,6 +151,7 @@ YUI.add('great:views:todos', function (Y) {
 {
   requires: [
     'views:lib:list',
-    'great:views:todo'
+    'great:views:todo',
+    'great:views:create_todo'
   ]
 });
