@@ -29,6 +29,11 @@ module.exports = function(grunt) {
         files: ['js/**/*.js'],
         tasks: ['jshint'],
         options: { interrupt: true }
+      },
+      yuiConfig: {
+        files: ['js/**/*.js'],
+        tasks: ['yuiConfig:development'],
+        options: { interrupt: true }
       }
     },
 
@@ -130,12 +135,90 @@ module.exports = function(grunt) {
           'js/app/**/*.js'
         ]
       }
+    },
+
+    // Generation of the YUI config file
+    yuiConfig: {
+      development: {
+        options: {
+          dest:       'js/yui_config.js',
+          root:       "js/vendor/yui3/3.10.1/build/",
+          base:       "/js/vendor/yui3/3.10.1/build/",
+          comboBase:  "/combobot/y/&",
+          combine:    true,
+          groups: {
+            // gallery: {
+            //   combine:  true,
+            //   base:     "/js/vendor/yui3-gallery/build/",
+            //   root:     "js/vendor/yui3-gallery/build/",
+            //   patterns: {
+            //     "gallery-":    {},
+            //     "gallerycss-": { type: "css" }
+            //   }
+            // },
+            app: {
+              comboBase:  "/combobot/{{hash}}/&",
+              combine: false,
+              root: '',
+              base: '/',
+              modules: [
+                'js/app/**/*.js',
+                'js/lib/*.js',
+                'js/great.js'
+                // 'js/templates.js',
+                // 'js/vendor/aviator.js'
+                // 'js/vendor/handlebars.runtime.js'
+              ],
+              processPath: function (p) {
+                return p.replace('public/', '');
+              }
+            }
+          }
+        }
+      },
+      // production: {
+      //   options: {
+      //     dest:       'public/js/yui_config.js',
+      //     root:       "js/vendor/yui3/3.10.1/build/",
+      //     base:       "/js/vendor/yui3/3.10.1/build/",
+      //     comboBase:  "/combobot/y/&",
+      //     combine:    true,
+      //     groups: {
+      //       gallery: {
+      //         combine:  true,
+      //         base:     "/js/vendor/yui3-gallery/build/",
+      //         root:     "js/vendor/yui3-gallery/build/",
+      //         patterns: {
+      //           "gallery-":    {},
+      //           "gallerycss-": { type: "css" }
+      //         }
+      //       },
+      //       app: {
+      //         comboBase:  "/combobot/{{hash}}/&",
+      //         combine: true,
+      //         root: '',
+      //         base: '/',
+      //         modules: [
+      //           'public/js/m/**/*.js',
+      //           'public/js/app/compiled_templates.js',
+      //           'public/js/vendor/d3/d3.js',
+      //           'public/js/vendor/aviator.js',
+      //           'public/js/vendor/moment.js'
+      //         ],
+      //         excludeFiles: ['public/js/m/app-min.js'],
+      //         processPath: function (p) {
+      //           return p.replace('public/', '');
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
 
   });
 
   grunt.registerTask('lessify', ['concat:great', 'less:all']);
-  grunt.registerTask('bootstrap', ['lessify', 'handlebars']);
+  grunt.registerTask('bootstrap', ['lessify', 'handlebars', 'yuiConfig:development']);
   grunt.registerTask('build', ['lessify', 'cssmin', 'handlebars', 'uglify']);
 
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -145,5 +228,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-yui-config');
 
 };
