@@ -1,0 +1,7 @@
+{
+  "name": "great",
+  "version": "0.0.1",
+  "dependencies": {
+    "aviator": "~0.2.0"
+  }
+}
