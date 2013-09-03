@@ -2,6 +2,7 @@
   "name": "great",
   "version": "0.0.1",
   "dependencies": {
-    "aviator": "~0.2.0"
+    "aviator": "~0.3.0",
+    "react": "~0.4.0"
   }
 }

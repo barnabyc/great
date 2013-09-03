@@ -12,15 +12,21 @@
 
   <link rel="stylesheet" href="css/great.css"><!-- BRO, DO YOU ENV CHECK? -->
 
-  <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-  <script src="js/vendor/handlebars.runtime.js"></script>
-  <script src="js/vendor/aviator/aviator.js"></script>
-  <script src="js/templates.js"></script>
+  <!-- script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script -->
+  <!-- script src="js/vendor/handlebars.runtime.js"></script -->
 
-  <script src="js/yui_config.js"></script>
+  <script src="components/react/react.min.js"></script>
+
+  <script src="js/vendor/aviator/aviator.js"></script>
+
+  <script src="components/react/react.min.js"></script>
+
+  <!-- script src="js/templates.js"></script -->
+
+  <!-- script src="js/yui_config.js"></script -->
 
   <!-- =FEMOCK -->
-  <script src="js/test-data.js"></script>
+  <!-- script src="js/test-data.js"></script -->
 
   <!-- =BUILD -->
   <!-- script src="js/templates.min.js"></script -->
@@ -38,13 +44,19 @@
 <footer></footer>
 
 <script>
-  YUI().use('great:app', 'great:test_data', function (Y) {
-    new Y.GREAT.App({
-      container: "#great",
-      toDosList: Y.namespace('GREAT').TestToDosList
-    }).render().dispatch();
-  });
+  // YUI().use('great:app', 'great:test_data', function (Y) {
+  //   new Y.GREAT.App({
+  //     container: "#great",
+  //     toDosList: Y.namespace('GREAT').TestToDosList
+  //   }).render().dispatch();
+  // });
 </script>
+
+<script src="js/test-data-simple.js"></script>
+
+<script src="build/simple_todo.js"></script>
+<script src="build/simple_todo_list.js"></script>
+<script src="build/simple_list_of_todo_lists.js"></script>
 
 </body>
 </html>
